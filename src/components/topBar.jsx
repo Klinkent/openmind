@@ -1,7 +1,14 @@
 import React, { useContext } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 
+import { CurrentUserContext } from '../contexts/currentUser'
+
 const TopBar = () => {
+  const [currentUserState] = useContext(CurrentUserContext)
+  const userImage =
+    (currentUserState.isLoggedIn && currentUserState.currentUser.image) ||
+    'https://media.istockphoto.com/vectors/silhouette-default-avatar-woman-to-social-user-vector-id860642028'
+
   return (
     <nav className='navbar navbar-light'>
       <div className='container'>
@@ -14,28 +21,45 @@ const TopBar = () => {
               Домой
             </NavLink>
           </li>
-          <li className='nav-item'>
-            <NavLink to='/articles/new' className='nav-link'>
-              <i className='ion-compose' />
-              &nbsp; Создать
-            </NavLink>
-          </li>
-          <li className='nav-item'>
-            <NavLink to='/settings' className='nav-link'>
-              <i className='ion-gear-a' />
-              &nbsp; Настройки
-            </NavLink>
-          </li>
-          <li className='nav-item'>
-            <NavLink to='/login' className='nav-link'>
-              Войти
-            </NavLink>
-          </li>
-          <li className='nav-item'>
-            <NavLink to='/register' className='nav-link'>
-              Регистрация
-            </NavLink>
-          </li>
+          {currentUserState.isLoggedIn && (
+            <>
+              <li className='nav-item'>
+                <NavLink to='/articles/new' className='nav-link'>
+                  <i className='ion-compose' />
+                  &nbsp; New Post
+                </NavLink>
+              </li>
+              <li className='nav-item'>
+                <NavLink to='/settings' className='nav-link'>
+                  <i className='ion-gear-a' />
+                  &nbsp; Settings
+                </NavLink>
+              </li>
+              <li className='nav-item'>
+                <NavLink
+                  to={`/profiles/${currentUserState.currentUser.username}`}
+                  className='nav-link'
+                >
+                  <img className='user-pic' src={userImage} alt='' />
+                  &nbsp; {currentUserState.currentUser.username}
+                </NavLink>
+              </li>
+            </>
+          )}
+          {currentUserState.isLoggedIn === false && (
+            <>
+              <li className='nav-item'>
+                <NavLink to='/login' className='nav-link'>
+                  Войти
+                </NavLink>
+              </li>
+              <li className='nav-item'>
+                <NavLink to='/register' className='nav-link'>
+                  Регистрация
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>

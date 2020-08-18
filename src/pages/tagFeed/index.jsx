@@ -1,21 +1,24 @@
 import React, { useEffect } from 'react'
 import { stringify } from 'query-string'
 
-import Pagination from './pagination'
-import { getPaginator, limit } from '../utils'
-import useFetch from '../hooks/useFetch'
-import Feed from './feed'
+import Feed from '../../components/feed'
+import useFetch from '../../hooks/useFetch'
+import Pagination from '../../components/pagination'
+import { getPaginator, limit } from '../../utils'
+import PopularTags from '../../components/popularTags'
+import Loading from '../../components/loading'
+import ErrorMessage from '../../components/errorMessage'
+import FeedToggler from '../../components/feedToggler'
+import Banner from '../../components/banner'
 
-import PopularTags from './popularTags'
-import Loading from './loading'
-import ErrorMessage from './errorMessage'
-import FeedToggler from './feedToggler'
-
-const GlobalFeed = ({ location, match }) => {
+const TagFeed = ({ location, match }) => {
+  const tagName = match.params.slug
+  console.log('tagName', tagName)
   const { offset, currentPage } = getPaginator(location.search)
   const stringifiedParams = stringify({
     limit,
     offset,
+    tag: tagName,
   })
   const apiUrl = `/articles?${stringifiedParams}`
   const currentUrl = match.url
@@ -27,16 +30,13 @@ const GlobalFeed = ({ location, match }) => {
 
   return (
     <div className='home-page'>
-      <div className='banner'>
-        <h1>Medium</h1>
-        <p>Поделись знаниями с другими!</p>
-      </div>
+      <Banner />
       <div className='container page'>
         <div className='row'>
           <div className='col-md-9'>
-            <FeedToggler />
-            {isLoading && <div>Загрузка...</div>}
-            {error && <div>Имеется ошибка</div>}
+            <FeedToggler tagName={tagName} />
+            {isLoading && <Loading />}
+            {error && <ErrorMessage />}
             {!isLoading && response && (
               <>
                 <Feed articles={response.articles} />
@@ -58,4 +58,4 @@ const GlobalFeed = ({ location, match }) => {
   )
 }
 
-export default GlobalFeed
+export default TagFeed
