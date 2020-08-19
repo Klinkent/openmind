@@ -10,6 +10,8 @@ import { CurrentUserContext } from '../../contexts/currentUser'
 const Authentication = (props) => {
   const isLogin = props.match.path === '/login' // -> true/false, from router, this page
 
+  const [, dispatch] = useContext(CurrentUserContext)
+
   const pageTitle = isLogin ? 'Вход' : 'Регистрация'
   const descriptionLink = isLogin ? '/register' : '/login'
   const descriptionText = isLogin ? 'Аккаунт нужен?' : 'Есть учётка?'
@@ -20,8 +22,6 @@ const Authentication = (props) => {
   const [username, setUsername] = useState('')
   const [isSuccessfullSubmit, setIsSuccessfullSubmit] = useState(false)
   const [, setToken] = useLocalStorage('token')
-
-  const [, setCurrentUserState] = useContext(CurrentUserContext)
 
   const [{ response, isLoading, error }, doFetch] = useFetch(apiUrl)
 
@@ -45,13 +45,8 @@ const Authentication = (props) => {
     console.log('response', response)
     setToken(response.user.token)
     setIsSuccessfullSubmit(true)
-    setCurrentUserState((state) => ({
-      ...state,
-      isLoggedIn: true,
-      isLoading: false,
-      currentUser: response.user,
-    }))
-  }, [response, setToken])
+    dispatch({ type: 'SET_AUTHORIZED', payload: response.user })
+  }, [response, setToken, dispatch])
 
   if (isSuccessfullSubmit) {
     return <Redirect to='/' />

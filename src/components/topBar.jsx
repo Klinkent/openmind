@@ -26,13 +26,13 @@ const TopBar = () => {
               <li className='nav-item'>
                 <NavLink to='/articles/new' className='nav-link'>
                   <i className='ion-compose' />
-                  &nbsp; New Post
+                  &nbsp; Новый пост
                 </NavLink>
               </li>
               <li className='nav-item'>
                 <NavLink to='/settings' className='nav-link'>
                   <i className='ion-gear-a' />
-                  &nbsp; Settings
+                  &nbsp; Настройки
                 </NavLink>
               </li>
               <li className='nav-item'>

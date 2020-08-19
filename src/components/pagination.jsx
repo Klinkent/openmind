@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 import { range } from '../utils'
 
@@ -37,29 +37,29 @@ const Pagination = ({ total, limit, url, currentPage }) => {
   )
 }
 
-PaginationItem.defaultProps = {
-  page: PropTypes.string,
-  currentPage: PropTypes.string,
-  url: PropTypes.string,
-}
+// PaginationItem.defaultProps = {
+//   page: PropTypes.string,
+//   currentPage: PropTypes.string,
+//   url: PropTypes.string,
+// }
 
-PaginationItem.propTypes = {
-  page: PropTypes.string,
-  currentPage: PropTypes.string,
-  url: PropTypes.string,
-}
-Pagination.defaultProps = {
-  total: 0,
-  limit: 10,
-  url: '',
-  currentPage: 1,
-}
+// PaginationItem.propTypes = {
+//   page: PropTypes.string,
+//   currentPage: PropTypes.string,
+//   url: PropTypes.string,
+// }
+// Pagination.defaultProps = {
+//   total: 0,
+//   limit: 10,
+//   url: '',
+//   currentPage: 1,
+// }
 
-Pagination.propTypes = {
-  total: PropTypes.number,
-  limit: PropTypes.number,
-  url: PropTypes.string,
-  currentPage: PropTypes.number,
-}
+// Pagination.propTypes = {
+//   total: PropTypes.string,
+//   limit: PropTypes.string,
+//   url: PropTypes.string,
+//   currentPage: PropTypes.string,
+// }
 
 export default Pagination

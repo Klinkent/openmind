@@ -7,8 +7,6 @@ import useFetch from '../hooks/useFetch'
 import Feed from './feed'
 
 import PopularTags from './popularTags'
-import Loading from './loading'
-import ErrorMessage from './errorMessage'
 import FeedToggler from './feedToggler'
 
 const GlobalFeed = ({ location, match }) => {
