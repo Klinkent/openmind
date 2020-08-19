@@ -23,6 +23,8 @@ const GlobalFeed = ({ location, match }) => {
     doFetch()
   }, [currentPage, doFetch])
 
+  console.log('респонс', response)
+
   return (
     <div className='home-page'>
       <div className='banner'>

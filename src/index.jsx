@@ -5,7 +5,6 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import Routes from './routes'
 import Topbar from './components/topBar'
-// import Banner from './components/banner'
 import { CurrentUserProvider } from './contexts/currentUser'
 import CurrentUserChecker from './components/currentUserChecker'
 
@@ -15,7 +14,6 @@ export const App = () => {
       <CurrentUserChecker>
         <Router>
           <Topbar />
-          {/* <Banner /> */}
           <Routes />
         </Router>
       </CurrentUserChecker>
