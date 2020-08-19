@@ -86,7 +86,7 @@ const Article = (props) => {
                     className='btn btn-outline-secondary btn-sm'
                   >
                     <i className='ion-edit' />
-                    Edit Article
+                    &nbsp; Редактировать
                   </Link>
                   <button
                     type='button'
@@ -94,7 +94,7 @@ const Article = (props) => {
                     onClick={deleteArticle}
                   >
                     <i className='ion-trash-a' />
-                    Удалить статью
+                    &nbsp; Удалить статью
                   </button>
                 </span>
               )}

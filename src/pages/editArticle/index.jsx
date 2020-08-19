@@ -77,4 +77,3 @@ const EditArticle = ({ match }) => {
 }
 
 export default EditArticle
-d

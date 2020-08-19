@@ -41,7 +41,7 @@ const ArticleForm = ({ onSubmit, errors, initialValues }) => {
                   <input
                     type='text'
                     className='form-control form-control-lg'
-                    placeholder='Article title'
+                    placeholder='Заголовок'
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                   />
@@ -50,7 +50,7 @@ const ArticleForm = ({ onSubmit, errors, initialValues }) => {
                   <input
                     type='text'
                     className='form-control form-control-lg'
-                    placeholder='What is this article about?'
+                    placeholder='О чём вообще статья?'
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                   />
@@ -59,7 +59,7 @@ const ArticleForm = ({ onSubmit, errors, initialValues }) => {
                   <textarea
                     className='form-control'
                     rows='8'
-                    placeholder='Write your article (in markdown)'
+                    placeholder='Выразите мысли здесь'
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                   />
@@ -68,7 +68,7 @@ const ArticleForm = ({ onSubmit, errors, initialValues }) => {
                   <input
                     type='text'
                     className='form-control form-control-lg'
-                    placeholder='Enter tags'
+                    placeholder='Проставьте теги через запятую'
                     value={tagList}
                     onChange={(e) => setTagList(e.target.value)}
                   />

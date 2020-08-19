@@ -2,10 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Feed = ({ articles }) => {
+  console.log(articles)
   return (
     <div>
-      {articles.map((article, index) => (
-        <div className='article-preview' key={index}>
+      {articles.map((article, slug) => (
+        <div className='article-preview' key={slug}>
           <div className='article-meta'>
             <Link to={`/profiles/${article.author.username}`}>
               <img src={article.author.image} alt='' />

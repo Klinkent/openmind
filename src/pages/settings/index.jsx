@@ -1,10 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 
-import { CurrentUserContext } from 'contexts/currentUser'
-import useFetch from 'hooks/useFetch'
-import BackendErrorMessages from 'components/backendErrorMessages'
-import useLocalStorage from 'hooks/useLocalStorage'
+import useLocalStorage from '../../hooks/useLocalStorage'
+import useFetch from '../../hooks/useFetch'
+import { CurrentUserContext } from '../../contexts/currentUser'
 
 const Settings = () => {
   const apiUrl = '/user'
@@ -70,15 +69,14 @@ const Settings = () => {
       <div className='container page'>
         <div className='row'>
           <div className='col-md-6 offset-md-3 col-xs-12'>
-            <h1 className='text-xs-center'>Your settings</h1>
-            {error && <BackendErrorMessages backendErrors={error.errors} />}
+            <h1 className='text-xs-center'>Настройки юзера</h1>
             <form onSubmit={handleSubmit}>
               <fieldset>
                 <fieldset className='form-group'>
                   <input
                     type='text'
                     className='form-control form-control-lg'
-                    placeholder='URL of profile picture'
+                    placeholder='ссылка на картинку профиля'
                     value={image}
                     onChange={(e) => setImage(e.target.value)}
                   />
@@ -87,7 +85,7 @@ const Settings = () => {
                   <input
                     type='text'
                     className='form-control form-control-lg'
-                    placeholder='Username'
+                    placeholder='Имя пользователя'
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
@@ -96,7 +94,7 @@ const Settings = () => {
                   <textarea
                     type='text'
                     className='form-control form-control-lg'
-                    placeholder='Short bio'
+                    placeholder='О себе'
                     value={bio}
                     rows='8'
                     onChange={(e) => setBio(e.target.value)}
@@ -106,7 +104,7 @@ const Settings = () => {
                   <input
                     type='text'
                     className='form-control form-control-lg'
-                    placeholder='Email'
+                    placeholder='Почта'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -115,7 +113,7 @@ const Settings = () => {
                   <input
                     type='password'
                     className='form-control form-control-lg'
-                    placeholder='New password'
+                    placeholder='Новый пароль'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -124,7 +122,7 @@ const Settings = () => {
                   type='submit'
                   className='btn btn-lg btn-primary pull-xs-right'
                 >
-                  Update settings
+                  Обновить и сохранить
                 </button>
               </fieldset>
             </form>
@@ -134,7 +132,7 @@ const Settings = () => {
               className='btn btn-outline-danger'
               onClick={logout}
             >
-              Или нажмите сюда для выхода
+              Разлогиниться
             </button>
           </div>
         </div>
