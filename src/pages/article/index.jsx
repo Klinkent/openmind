@@ -57,6 +57,7 @@ const Article = (props) => {
     return <Redirect to='/' />
   }
 
+  console.log('тело статьи ', fetchArticleResponse)
   return (
     <div className='article-page'>
       <div className='banner'>

@@ -45,7 +45,6 @@ const Settings = () => {
       return
     }
     const { currentUser } = currentUserState
-
     setName(currentUser.username)
     setImage(currentUser.image)
     setBio(currentUser.bio)
@@ -77,7 +76,6 @@ const Settings = () => {
                     type='text'
                     className='form-control form-control-lg'
                     placeholder='ссылка на картинку профиля'
-                    value={image}
                     onChange={(e) => setImage(e.target.value)}
                   />
                 </fieldset>
@@ -86,7 +84,6 @@ const Settings = () => {
                     type='text'
                     className='form-control form-control-lg'
                     placeholder='Имя пользователя'
-                    value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </fieldset>
@@ -95,7 +92,6 @@ const Settings = () => {
                     type='text'
                     className='form-control form-control-lg'
                     placeholder='О себе'
-                    value={bio}
                     rows='8'
                     onChange={(e) => setBio(e.target.value)}
                   />
@@ -105,7 +101,6 @@ const Settings = () => {
                     type='text'
                     className='form-control form-control-lg'
                     placeholder='Почта'
-                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </fieldset>
@@ -114,7 +109,6 @@ const Settings = () => {
                     type='password'
                     className='form-control form-control-lg'
                     placeholder='Новый пароль'
-                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </fieldset>

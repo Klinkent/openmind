@@ -41,7 +41,7 @@ const UserProfile = ({ match, location }) => {
                     to={`/profiles/${response.profile.username}`}
                     className='nav-link'
                   >
-                    Мои посты
+                    Посты юзера
                   </NavLink>
                 </li>
                 <li className='nav-item'>

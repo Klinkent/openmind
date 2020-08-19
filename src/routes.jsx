@@ -20,7 +20,7 @@ const Routes = (props) => {
       <Route path='/settings' component={Settings} exact />
       <Route path='/articles/new' component={CreateArticle} />
       <Route path='/articles/:slug/edit' component={EditArticle} />
-      <Route path='/feed' component={YourFeed} exact />
+      <Route path='/feed' component={YourFeed} />
       <Route path='/tags/:slug' component={TagFeed} />
       <Route path='/articles/:slug' component={Article} />
       <Route path='/login' component={Authentication} />

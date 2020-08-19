@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { stringify } from 'query-string'
 
 import Feed from '../../components/feed'
@@ -11,7 +11,11 @@ import ErrorMessage from '../../components/errorMessage'
 import FeedToggler from '../../components/feedToggler'
 import Banner from '../../components/banner'
 
+import { CurrentUserContext } from '../../contexts/currentUser'
+
 const YourFeed = ({ location, match }) => {
+  const [currentUserState] = useContext(CurrentUserContext)
+
   const { offset, currentPage } = getPaginator(location.search)
   const stringifiedParams = stringify({
     limit,
@@ -20,7 +24,7 @@ const YourFeed = ({ location, match }) => {
   const apiUrl = `/articles/feed?${stringifiedParams}`
   const currentUrl = match.url
   const [{ response, error, isLoading }, doFetch] = useFetch(apiUrl)
-
+  console.log(response)
   useEffect(() => {
     doFetch()
   }, [currentPage, doFetch])

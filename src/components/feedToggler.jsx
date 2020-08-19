@@ -6,7 +6,7 @@ import { CurrentUserContext } from '../contexts/currentUser'
 
 const FeedToggler = ({ tagName }) => {
   const [currentUserState] = useContext(CurrentUserContext)
-
+  console.log(currentUserState)
   return (
     <div className='feed-toggler'>
       <ul className='nav nav-pills outline-active'>

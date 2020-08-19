@@ -10,7 +10,8 @@ import useFetch from '../../../hooks/useFetch'
 import { getPaginator, limit } from '../../../utils'
 
 const getApiUrl = ({ username, offset, isFavorites }) => {
-  const params = isFavorites
+  // чтобы лайкнуть пост - мы отправляем post-запрос на ../favourites, когда диз -- delete-запрос
+  const params = isFavorites // меняет параметры запроса, если статья в любимых
     ? {
         limit,
         offset,
@@ -21,7 +22,7 @@ const getApiUrl = ({ username, offset, isFavorites }) => {
         offset,
         author: username,
       }
-  return `/articles?${stringify(params)}`
+  return `/articles?${stringify(params)}` // /articles?author=BTRRTBhbj&limit=10&offset=0
 }
 
 const UserArticles = ({ username, location, url }) => {

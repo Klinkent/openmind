@@ -26,7 +26,7 @@ const TagFeed = ({ location, match }) => {
 
   useEffect(() => {
     doFetch()
-  }, [currentPage, doFetch])
+  }, [currentPage, doFetch, tagName])
 
   return (
     <div className='home-page'>
