@@ -5,6 +5,8 @@ import useLocalStorage from '../../hooks/useLocalStorage'
 import useFetch from '../../hooks/useFetch'
 import { CurrentUserContext } from '../../contexts/currentUser'
 
+// начать следующий день отсюда
+
 const Settings = () => {
   const apiUrl = '/user'
   const [{ response, error }, doFetch] = useFetch(apiUrl)

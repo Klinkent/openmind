@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Redirect } from 'react-router-dom'
 
-import { CurrentUserContext } from '../../contexts/currentUser'
+import { useSelector } from 'react-redux'
 import ArticleForm from '../../components/articleForm'
 import useFetch from '../../hooks/useFetch'
 
@@ -9,7 +9,7 @@ const CreateArticle = () => {
   const apiUrl = '/articles'
   const [isSuccessfullSubmit, setIsSuccessfullSubmit] = useState(false)
   const [{ response, error }, doFetch] = useFetch(apiUrl)
-  const [currentUserState] = useContext(CurrentUserContext)
+  const currentUserState = useSelector((state) => state.currentUser)
 
   const onSubmit = (article) => {
     doFetch({

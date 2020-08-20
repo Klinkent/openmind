@@ -1,7 +1,7 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 
-import { CurrentUserContext } from '../../contexts/currentUser'
+import { useSelector } from 'react-redux'
 import useFetch from '../../hooks/useFetch'
 import Loading from '../../components/loading'
 import ErrorMessage from '../../components/errorMessage'
@@ -21,7 +21,9 @@ const Article = (props) => {
   const [{ response: deleteArticleResponse }, doDeleteArticle] = useFetch(
     apiUrl
   )
-  const [currentUserState] = useContext(CurrentUserContext)
+
+  const currentUserState = useSelector((state) => state.currentUser)
+
   const [isSuccessfullDelete, setIsSuccessfullDelete] = useState(false)
 
   const isAuthor = () => {

@@ -3,6 +3,8 @@ import Axios from 'axios'
 
 import useLocalStorage from './useLocalStorage'
 
+// asyncThunk??
+
 export default (url) => {
   const baseUrl = 'https://conduit.productionready.io/api'
   const [isLoading, setIsLoading] = useState(false)

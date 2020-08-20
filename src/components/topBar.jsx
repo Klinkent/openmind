@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 
-import { CurrentUserContext } from '../contexts/currentUser'
+import { useSelector, useDispatch } from 'react-redux'
 
 const TopBar = () => {
-  const [currentUserState] = useContext(CurrentUserContext)
+  const currentUserState = useSelector((state) => state.currentUser)
+
   const userImage =
     (currentUserState.isLoggedIn && currentUserState.currentUser.image) ||
     'https://media.istockphoto.com/vectors/silhouette-default-avatar-woman-to-social-user-vector-id860642028'

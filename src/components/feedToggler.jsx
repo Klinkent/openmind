@@ -2,10 +2,10 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
-import { CurrentUserContext } from '../contexts/currentUser'
+import { useSelector, useDispatch } from 'react-redux'
 
 const FeedToggler = ({ tagName }) => {
-  const [currentUserState] = useContext(CurrentUserContext)
+  const currentUserState = useSelector((state) => state.currentUser)
   console.log(currentUserState)
   return (
     <div className='feed-toggler'>

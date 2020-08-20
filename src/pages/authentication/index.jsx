@@ -7,6 +7,8 @@ import { CurrentUserContext } from '../../contexts/currentUser'
 // import {CurrentUserContext} from '../../contexts/currentUser'
 // import BackendErrorMessages from '../../components/backendErrorMessages'
 
+// начать следующий день отсюда
+
 const Authentication = (props) => {
   const isLogin = props.match.path === '/login' // -> true/false, from router, this page
 
