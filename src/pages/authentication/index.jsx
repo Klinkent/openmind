@@ -1,19 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import useFetch from '../../hooks/useFetch'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import { CurrentUserContext } from '../../contexts/currentUser'
-
-// import {CurrentUserContext} from '../../contexts/currentUser'
-// import BackendErrorMessages from '../../components/backendErrorMessages'
-
-// начать следующий день отсюда
+import currentUserSlice from '../../store/slices'
 
 const Authentication = (props) => {
   const isLogin = props.match.path === '/login' // -> true/false, from router, this page
-
-  const [, dispatch] = useContext(CurrentUserContext)
-
+  const dispatch = useDispatch()
   const pageTitle = isLogin ? 'Вход' : 'Регистрация'
   const descriptionLink = isLogin ? '/register' : '/login'
   const descriptionText = isLogin ? 'Аккаунт нужен?' : 'Есть учётка?'
@@ -47,7 +41,7 @@ const Authentication = (props) => {
     console.log('response', response)
     setToken(response.user.token)
     setIsSuccessfullSubmit(true)
-    dispatch({ type: 'SET_AUTHORIZED', payload: response.user })
+    dispatch(currentUserSlice.actions.SET_AUTHORIZED(response.user))
   }, [response, setToken, dispatch])
 
   if (isSuccessfullSubmit) {

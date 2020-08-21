@@ -1,13 +1,19 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 
+import { useSelector, useDispatch } from 'react-redux'
+
+import currentUserSlice from '../../store/slices'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import useFetch from '../../hooks/useFetch'
-import { CurrentUserContext } from '../../contexts/currentUser'
-
 // начать следующий день отсюда
 
 const Settings = () => {
+  const currentUserState = useSelector((state) => state.currentUser)
+
+  console.clear()
+  console.log('стейт из настроек', currentUserState)
+  const dispatch = useDispatch()
   const apiUrl = '/user'
   const [{ response, error }, doFetch] = useFetch(apiUrl)
   const [name, setName] = useState('')
@@ -15,7 +21,6 @@ const Settings = () => {
   const [bio, setBio] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [currentUserState, dispatch] = useContext(CurrentUserContext)
   const [, setToken] = useLocalStorage('token')
   const [successfullLogout, setIsSuccessfullLogout] = useState(false)
 
@@ -38,10 +43,10 @@ const Settings = () => {
   const logout = (event) => {
     event.preventDefault()
     setToken('')
-    dispatch({ type: 'SET_UNAUTHORIZED' })
+    dispatch(currentUserSlice.actions.SET_UNAUTHORIZED())
     setIsSuccessfullLogout(true)
   }
-
+  // скорее всего здесь нужан реализация через юздиспатч
   useEffect(() => {
     if (!currentUserState.currentUser) {
       return
@@ -58,7 +63,7 @@ const Settings = () => {
       return
     }
 
-    dispatch({ type: 'SET_AUTHORIZED', payload: response.user })
+    dispatch(currentUserSlice.actions.SET_AUTHORIZED())
   }, [response, dispatch])
 
   if (successfullLogout) {

@@ -13,7 +13,7 @@ export default (url) => {
   const [options, setOptions] = useState({})
   const [token] = useLocalStorage('token')
 
-  const doFetch = useCallback((options = {}) => {
+  const doFetch = useCallback((options) => {
     setOptions(options)
     setIsLoading(true)
   }, [])
@@ -35,6 +35,7 @@ export default (url) => {
     Axios(baseUrl + url, requestOptions)
       .then((res) => {
         setResponse(res.data)
+        console.log('дата реса', res.data)
         setIsLoading(false)
       })
       .catch((e) => {

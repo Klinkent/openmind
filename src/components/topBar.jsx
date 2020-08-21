@@ -1,11 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const TopBar = () => {
-  const currentUserState = useSelector((state) => state.currentUser)
+  const currentUserState = useSelector((state) => {
+    return state.currentUser
+  })
 
+  console.log('localstorage', localStorage)
   const userImage =
     (currentUserState.isLoggedIn && currentUserState.currentUser.image) ||
     'https://media.istockphoto.com/vectors/silhouette-default-avatar-woman-to-social-user-vector-id860642028'
@@ -47,7 +50,7 @@ const TopBar = () => {
               </li>
             </>
           )}
-          {currentUserState.isLoggedIn === false && (
+          {currentUserState.isLoggedIn === null && (
             <>
               <li className='nav-item'>
                 <NavLink to='/login' className='nav-link'>

@@ -13,7 +13,6 @@ import Banner from '../../components/banner'
 
 const TagFeed = ({ location, match }) => {
   const tagName = match.params.slug
-  console.log('tagName', tagName)
   const { offset, currentPage } = getPaginator(location.search)
   const stringifiedParams = stringify({
     limit,

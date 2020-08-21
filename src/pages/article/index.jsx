@@ -22,7 +22,9 @@ const Article = (props) => {
     apiUrl
   )
 
-  const currentUserState = useSelector((state) => state.currentUser)
+  const currentUserState = useSelector((state) => {
+    return state.currentUser
+  })
 
   const [isSuccessfullDelete, setIsSuccessfullDelete] = useState(false)
 
@@ -59,7 +61,6 @@ const Article = (props) => {
     return <Redirect to='/' />
   }
 
-  console.log('тело статьи ', fetchArticleResponse)
   return (
     <div className='article-page'>
       <div className='banner'>

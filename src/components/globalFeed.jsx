@@ -22,7 +22,7 @@ const GlobalFeed = ({ location, match }) => {
 
   useEffect(() => {
     doFetch()
-  }, [currentPage, doFetch])
+  }, [doFetch])
 
   return (
     <div className='home-page'>

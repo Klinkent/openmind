@@ -7,21 +7,15 @@ import { Provider } from 'react-redux'
 import store from './store/configureStore/reducers'
 import Routes from './routes'
 import Topbar from './components/topBar'
-import { CurrentUserProvider } from './contexts/currentUser'
-import CurrentUserChecker from './components/currentUserChecker'
 
 // а тут правильно заимплеменчен стор или нет?
 export const App = () => {
   return (
     <Provider store={store}>
-      <CurrentUserProvider>
-        <CurrentUserChecker>
-          <Router>
-            <Topbar />
-            <Routes />
-          </Router>
-        </CurrentUserChecker>
-      </CurrentUserProvider>
+      <Router>
+        <Topbar />
+        <Routes />
+      </Router>
     </Provider>
   )
 }
