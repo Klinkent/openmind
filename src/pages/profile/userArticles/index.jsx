@@ -27,8 +27,10 @@ const getApiUrl = ({ username, offset, isFavorites }) => {
 
 const UserArticles = ({ username, location, url }) => {
   const isFavorites = location.pathname.includes('favorites')
-
   const { offset, currentPage } = getPaginator(location.search)
+
+  // Добавляет url для страницы пролайканных статей, нужно для корректной работы пагинации
+  const addFavoritesUrl = isFavorites ? `/favorites` : ''
 
   const apiUrl = getApiUrl({ username, offset, isFavorites })
   const [{ response, isLoading, error }, doFetch] = useFetch(apiUrl)
@@ -47,7 +49,7 @@ const UserArticles = ({ username, location, url }) => {
           <Pagination
             total={response.articlesCount}
             limit={limit}
-            url={url}
+            url={url + addFavoritesUrl}
             currentPage={currentPage}
           />
         </>

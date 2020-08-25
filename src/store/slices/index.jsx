@@ -4,7 +4,7 @@ const currentUserSlice = createSlice({
   name: 'currentUser',
   initialState: {
     isLoading: false,
-    isLoggedIn: false,
+    isLoggedIn: [],
     currentUser: {
       username: localStorage.getItem('name'),
       email: localStorage.getItem('email'),
