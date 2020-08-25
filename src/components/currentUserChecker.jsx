@@ -18,14 +18,14 @@ const CurrentUserChecker = ({ children }) => {
     }
 
     doFetch()
-    dispatch(currentUserSlice.actions.LOADING()) // правильно ли указан диспатч?
+    dispatch(currentUserSlice.actions.LOADING())
   }, [dispatch, doFetch, token])
 
   useEffect(() => {
     if (!response) {
       return
     }
-    dispatch(currentUserSlice.actions.SET_AUTHORIZED()) // а здесь?
+    dispatch(currentUserSlice.actions.SET_AUTHORIZED(response.user))
   }, [dispatch, response])
   return children
 }

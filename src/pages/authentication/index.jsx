@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import useFetch from '../../hooks/useFetch'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import currentUserSlice from '../../store/slices'
+import UserProfile from '../../hooks/userProfileStorage'
 
 const Authentication = (props) => {
   const isLogin = props.match.path === '/login' // -> true/false, from router, this page
@@ -18,6 +19,12 @@ const Authentication = (props) => {
   const [username, setUsername] = useState('')
   const [isSuccessfullSubmit, setIsSuccessfullSubmit] = useState(false)
   const [, setToken] = useLocalStorage('token')
+
+  // кладем данные в сторадж
+  const [, setNameToStorage] = useLocalStorage('name')
+  const [, setImageToStorage] = useLocalStorage('image')
+  const [, setBioToStorage] = useLocalStorage('bio')
+  const [, setEmailToStorage] = useLocalStorage('email')
 
   const [{ response, isLoading, error }, doFetch] = useFetch(apiUrl)
 
@@ -38,11 +45,25 @@ const Authentication = (props) => {
     if (!response) {
       return
     }
-    console.log('response', response)
     setToken(response.user.token)
     setIsSuccessfullSubmit(true)
     dispatch(currentUserSlice.actions.SET_AUTHORIZED(response.user))
-  }, [response, setToken, dispatch])
+
+    // UserProfile.setUserData(response.user)
+    // кладем данные в сторадж при авторизации
+    setNameToStorage(response.user.username)
+    setImageToStorage(response.user.image)
+    setBioToStorage(response.user.bio)
+    setEmailToStorage(response.user.email)
+  }, [
+    response,
+    setToken,
+    dispatch,
+    setNameToStorage,
+    setImageToStorage,
+    setBioToStorage,
+    setEmailToStorage,
+  ])
 
   if (isSuccessfullSubmit) {
     return <Redirect to='/' />

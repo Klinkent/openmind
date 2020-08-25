@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import Axios from 'axios'
 
+import UserProfile from './userProfileStorage'
 import useLocalStorage from './useLocalStorage'
-
 // asyncThunk??
 
 export default (url) => {
@@ -35,7 +35,6 @@ export default (url) => {
     Axios(baseUrl + url, requestOptions)
       .then((res) => {
         setResponse(res.data)
-        console.log('дата реса', res.data)
         setIsLoading(false)
       })
       .catch((e) => {

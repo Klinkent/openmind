@@ -1,14 +1,16 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
-
 import { useSelector } from 'react-redux'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 const TopBar = () => {
   const currentUserState = useSelector((state) => {
     return state.currentUser
   })
 
-  console.log('localstorage', localStorage)
+  const [name, setNameToStorage] = useLocalStorage('name')
+  const [image, setImageToStorage] = useLocalStorage('image')
+
   const userImage =
     (currentUserState.isLoggedIn && currentUserState.currentUser.image) ||
     'https://media.istockphoto.com/vectors/silhouette-default-avatar-woman-to-social-user-vector-id860642028'
@@ -44,13 +46,13 @@ const TopBar = () => {
                   to={`/profiles/${currentUserState.currentUser.username}`}
                   className='nav-link'
                 >
-                  <img className='user-pic' src={userImage} alt='' />
-                  &nbsp; {currentUserState.currentUser.username}
+                  <img className='user-pic' src={userImage} alt='ава' />
+                  &nbsp;{currentUserState.currentUser.username}
                 </NavLink>
               </li>
             </>
           )}
-          {currentUserState.isLoggedIn === null && (
+          {currentUserState.isLoggedIn === false && (
             <>
               <li className='nav-item'>
                 <NavLink to='/login' className='nav-link'>

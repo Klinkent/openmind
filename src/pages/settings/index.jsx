@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 
 import { useSelector, useDispatch } from 'react-redux'
+import UserProfile from '../../hooks/userProfileStorage'
 
 import currentUserSlice from '../../store/slices'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import useFetch from '../../hooks/useFetch'
-// начать следующий день отсюда
 
 const Settings = () => {
   const currentUserState = useSelector((state) => state.currentUser)
-
-  console.clear()
-  console.log('стейт из настроек', currentUserState)
   const dispatch = useDispatch()
   const apiUrl = '/user'
   const [{ response, error }, doFetch] = useFetch(apiUrl)
@@ -23,6 +20,12 @@ const Settings = () => {
   const [password, setPassword] = useState('')
   const [, setToken] = useLocalStorage('token')
   const [successfullLogout, setIsSuccessfullLogout] = useState(false)
+
+  // кладем данные в сторадж
+  const [, setNameToStorage] = useLocalStorage('name')
+  const [, setImageToStorage] = useLocalStorage('image')
+  const [, setBioToStorage] = useLocalStorage('bio')
+  const [, setEmailToStorage] = useLocalStorage('email')
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -39,12 +42,19 @@ const Settings = () => {
         },
       },
     })
+    // кладем данные в сторадж при изменении настроек
   }
   const logout = (event) => {
     event.preventDefault()
     setToken('')
     dispatch(currentUserSlice.actions.SET_UNAUTHORIZED())
     setIsSuccessfullLogout(true)
+
+    setNameToStorage('name')
+    setImageToStorage('image')
+    setBioToStorage('bio')
+    setEmailToStorage('email')
+    // удаляем данные текущего пользователя из хранилища (TODO)
   }
   // скорее всего здесь нужан реализация через юздиспатч
   useEffect(() => {
@@ -56,15 +66,26 @@ const Settings = () => {
     setImage(currentUser.image)
     setBio(currentUser.bio)
     setEmail(currentUser.email)
-  }, [currentUserState])
+
+    setNameToStorage(currentUser.username)
+    setImageToStorage(currentUser.image)
+    setBioToStorage(currentUser.bio)
+    setEmailToStorage(currentUser.email)
+  }, [
+    currentUserState,
+    setBioToStorage,
+    setEmailToStorage,
+    setImageToStorage,
+    setNameToStorage,
+  ])
 
   useEffect(() => {
     if (!response) {
       return
     }
 
-    dispatch(currentUserSlice.actions.SET_AUTHORIZED())
-  }, [response, dispatch])
+    dispatch(currentUserSlice.actions.SET_AUTHORIZED(response.user))
+  }, [response, dispatch, doFetch])
 
   if (successfullLogout) {
     return <Redirect to='/' />
